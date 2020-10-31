@@ -6,6 +6,9 @@ public class UserModel {
         this.id = id;
         this.name = name;
     }
+    public  UserModel(){
+
+    }
 
     public String getName(){
         return this.name;

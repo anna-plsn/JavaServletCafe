@@ -1,5 +1,6 @@
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,11 +24,15 @@ public class RegisterServlet extends HttpServlet {
         String sql = "INSERT INTO user (name) VALUES( ? )";
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
+        UserModel user = new UserModel(0, name);
 
+        Cookie cookieName = new Cookie("name", user.getName());
+        resp.addCookie(cookieName);
+
+        req.getSession().setAttribute("user", user);
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            UserModel user = new UserModel(0, name);
 
             statement.setString(1, user.name);
             statement.executeUpdate();
