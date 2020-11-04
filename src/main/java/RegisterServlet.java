@@ -1,6 +1,5 @@
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,20 +32,20 @@ public class RegisterServlet extends HttpServlet {
         String password = req.getParameter("password");
         UserModel user = new UserModel(0, name, surname, email, password,"");
         String error = "";
-        Boolean existEmail;
+        Boolean existEmail = false;
 
 
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql2)) {
 
-            statement.setString(1, email);
+            statement.setString(1, user.getEmail());
             ResultSet resultSet = statement.executeQuery();
             String s = null;
             if(resultSet.next()){
                 s = resultSet.getString("email");
             }
 
-            if (s == user.getEmail()){
+            if (s != null){
                 existEmail = true;
             }
 
@@ -55,7 +54,7 @@ public class RegisterServlet extends HttpServlet {
             throw new IllegalStateException(e);
         }
 
-        if (existEmail = false) {
+        if (!existEmail) {
             try (Connection connection = dataSource.getConnection();
                  PreparedStatement statement = connection.prepareStatement(sql)) {
 
@@ -70,7 +69,7 @@ public class RegisterServlet extends HttpServlet {
             } catch (SQLException e) {
                 throw new IllegalStateException(e);
             }
-            resp.sendRedirect("/emailExist");
+            resp.sendRedirect("/login");
         }
         else {
             error = "Такой email уже существует";
