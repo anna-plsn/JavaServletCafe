@@ -26,7 +26,7 @@ public class SearchServlet extends HttpServlet {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 String name = resultSet.getString("name");
-                nameModels.add(new UserModel(0,name));
+                nameModels.add(new UserModel(0,name, "","","", ""));
             }
 
         }

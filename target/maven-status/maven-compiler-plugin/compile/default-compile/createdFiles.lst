@@ -1,3 +1,7 @@
+ProfileServlet.class
 TestServlet.class
+LoginServlet.class
+ExitServlet.class
+DirUploadServlet.class
 GlobalListener.class
-Test.class
+ImgServlet.class

@@ -9,11 +9,11 @@ public class GlobalListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
 
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/dbtest?useSSL=false");
+        hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/cafedb?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
         hikariConfig.setUsername("root");
-        hikariConfig.setPassword("");
+        hikariConfig.setPassword("2001");
         hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        hikariConfig.setMaximumPoolSize(20);
+        hikariConfig.setMaximumPoolSize(40);
 
         HikariDataSource hikariDataSource =new HikariDataSource(hikariConfig);
 
@@ -25,3 +25,4 @@ public class GlobalListener implements ServletContextListener {
 
     }
 }
+

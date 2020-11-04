@@ -36,7 +36,7 @@ public class TestServlet extends HttpServlet {
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            UserModel user = new UserModel(0, "Алексей");
+            UserModel user = new UserModel(0, "Алексей", "","","", "");
 
             statement.setString(1, user.name);
             statement.executeUpdate();

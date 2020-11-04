@@ -26,7 +26,11 @@ public class MainServlet extends HttpServlet {
             while (resultSet.next()){
                 String s = resultSet.getString(2);
                 int id = resultSet.getInt("id");
-                userModels.add(new UserModel(id, s));
+                String surname = resultSet.getString(3);
+                String email = resultSet.getString(4);
+                String password = resultSet.getString(5);
+                String image = resultSet.getString("image");
+                userModels.add(new UserModel(id, s, surname,email, password, image));
             }
         }
         catch (SQLException e) {

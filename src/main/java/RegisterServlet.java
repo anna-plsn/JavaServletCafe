@@ -8,12 +8,15 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String error = "";
+        req.setAttribute("error", error);
     req.getRequestDispatcher("/register.ftl" ).forward(req,resp);
     }
 
@@ -21,25 +24,58 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("datasource");
-        String sql = "INSERT INTO user (name) VALUES( ? )";
+        String sql = "INSERT INTO user (name, surname, email, password, image) VALUES( ?,?,?,?,?)";
+        String sql2 = "Select email from user where email=?";
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
-        UserModel user = new UserModel(0, name);
+        String surname = req.getParameter("surname");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        UserModel user = new UserModel(0, name, surname, email, password,"");
+        String error = "";
+        Boolean existEmail;
 
-        Cookie cookieName = new Cookie("name", user.getName());
-        resp.addCookie(cookieName);
 
-        req.getSession().setAttribute("user", user);
         try(Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+            PreparedStatement statement = connection.prepareStatement(sql2)) {
 
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            String s = null;
+            if(resultSet.next()){
+                s = resultSet.getString("email");
+            }
 
-            statement.setString(1, user.name);
-            statement.executeUpdate();
+            if (s == user.getEmail()){
+                existEmail = true;
+            }
+
         }
         catch (SQLException e) {
             throw new IllegalStateException(e);
         }
-        resp.sendRedirect("/db");
+
+        if (existEmail = false) {
+            try (Connection connection = dataSource.getConnection();
+                 PreparedStatement statement = connection.prepareStatement(sql)) {
+
+
+                statement.setString(1, user.name);
+                statement.setString(2, user.surname);
+                statement.setString(3, user.email);
+                statement.setString(4, user.password);
+                statement.setString(5, "default-user-avatar.jpg");
+                statement.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new IllegalStateException(e);
+            }
+            resp.sendRedirect("/emailExist");
+        }
+        else {
+            error = "Такой email уже существует";
+            req.setAttribute("error", error);
+            req.getRequestDispatcher("/register.ftl").forward(req, resp);
+        }
     }
 }
