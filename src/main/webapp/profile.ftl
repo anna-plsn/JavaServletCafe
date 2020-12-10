@@ -3,6 +3,12 @@
 <#import "base.ftl" as base>
 
 <@base.main css = ["style"]>
+
+
+
+
+
+
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
@@ -14,10 +20,9 @@
                 <div class="panel-heading"><h4>User Profile</h4></div>
                 <div class="panel-body">
                     <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
-                        <img alt="User Pic"
+                        <img  alt="User Pic"
                              src="/img?filename=${user.getImage()}"
                              id="profile-image1" class="img-circle img-responsive">
-
 
                     </div>
                     <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">

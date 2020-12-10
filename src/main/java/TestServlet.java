@@ -9,48 +9,39 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-@WebServlet("/main")
+@WebServlet(urlPatterns = "/")
 public class TestServlet extends HttpServlet {
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("datasource");
-        String query = "SELECT * FROM user";
+
+        String query = "SELECT * FROM product";
+
+        List<ProductModel> productModels = new ArrayList<>();
 
         try(Connection connection = dataSource.getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
-            if(resultSet.next()){
+            while (resultSet.next()){
                 String s = resultSet.getString(2);
-                System.out.println(s);
+                int id = resultSet.getInt("id");
+                String image = resultSet.getString(3);
+                productModels.add(new ProductModel(id, s, image));
             }
         }
         catch (SQLException e) {
             throw new IllegalStateException(e);
         }
-
-        String sql = "INSERT INTO user (name) VALUES( ? )";
-
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            UserModel user = new UserModel(0, "Алексей", "","","", "");
-
-            statement.setString(1, user.name);
-            statement.executeUpdate();
-        }
-        catch (SQLException e) {
-            throw new IllegalStateException(e);
-        }
-
-        System.out.println(req.getParameterMap());
-        req.getRequestDispatcher("/head.html").forward(req, resp);
+        req.setAttribute("products", productModels);
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
     }
 }
 

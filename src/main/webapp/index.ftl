@@ -1,7 +1,7 @@
 <#ftl encoding="UTF-8"/>
 
-<#import "base.ftl" as base>
-<@base.main css = ["style"]>
+<#import "admin.ftl" as admin>
+<@admin.main css = ["style"]>
     <body>
     <br>
     <div class="container">
@@ -18,11 +18,11 @@
 
             <tr>
                 <td>${user.getName()}</td>
-                <td>${user.getSurname()}</td>
-                <td>${user.getEmail()}</td>
-                <td>${user.getPassword()}</td>
-                <td>${user.getImage()}</td>
-                <td><a href="/delete?id=${user.getId()}">Delete</a></td>
+                <td>${user.getSurname()!"null"}</td>
+                <td>${user.getEmail()!"null"}</td>
+                <td>${user.getPassword()!"null"}</td>
+                <td>${user.getImage()!"null"}</td>
+                <td><a href="/qwer/delete?id=${user.getId()}">Delete</a></td>
             </tr>
             </#list>
         </table>
@@ -30,4 +30,4 @@
     </div>
     </body>
 
-</@base.main>
+</@admin.main>

@@ -8,20 +8,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-@WebFilter(urlPatterns = "/qwer/delete", filterName = "delete")
-public class DeleterFilter implements Filter {
+@WebFilter(urlPatterns = "/qwer/deleteProduct", filterName = "deleteProduct")
+public class DeleteProductFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
     }
 
+
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        int id=Integer.parseInt(servletRequest.getParameter("id"));
+        int id = Integer.parseInt(servletRequest.getParameter("id"));
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
         DataSource dataSource = (DataSource) servletRequest.getServletContext().getAttribute("datasource");
-        String sql = "DELETE FROM user WHERE id = ?";
+
+        String sql = "DELETE FROM product WHERE id = ?";
 
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -34,6 +37,6 @@ public class DeleterFilter implements Filter {
         catch (SQLException e) {
             throw new IllegalStateException(e);
         }
-        resp.sendRedirect("/db");
+        resp.sendRedirect("/productDB");
     }
 }

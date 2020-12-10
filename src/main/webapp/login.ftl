@@ -18,6 +18,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             <br>
+            <br>
             <p>${error}</p>
             <a href="/register" >В первый раз, да?</a>
         </div>

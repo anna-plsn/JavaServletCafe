@@ -27,20 +27,19 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Hello<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Catalog<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/db">Database</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/register">Add element</a>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
+
             </ul>
 
             <!-- <li class="nav-item dropdown dmenu">
