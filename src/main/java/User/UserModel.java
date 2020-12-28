@@ -1,3 +1,5 @@
+package User;
+
 public class UserModel {
     int id;
     String name;

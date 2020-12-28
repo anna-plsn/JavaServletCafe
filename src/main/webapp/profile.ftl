@@ -3,61 +3,70 @@
 <#import "base.ftl" as base>
 
 <@base.main css = ["style"]>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            border-radius: 10px
+        }
 
+        .card {
+            width: 400px;
+            border: none;
+            border-radius: 10px;
+            background-color: #fff
+        }
 
+    </style>
 
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card p-3">
+            <div class="d-flex align-items-center">
+                <div class="image">
 
-
-
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-    <div class="container">
-        <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading"><h4>User Profile</h4></div>
-                <div class="panel-body">
-                    <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
-                        <img  alt="User Pic"
-                             src="/img?filename=${user.getImage()}"
-                             id="profile-image1" class="img-circle img-responsive">
-
+<#--image upload-->
+                    <div class="profile-img">
+                        <img alt="User Pic" src="/img?filename=${user.getImage()}" id="profile-image1"
+                             class="rounded" width="370">
                     </div>
-                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
-                        <div class="container">
-                            <h2>${user.getSurname()}</h2>
-                            <p>${user.getName()}</p>
+                    <br>
+                    <h2>${user.getSurname()}</h2> <span>${user.getName()}</span>
+                    <br><br>
 
+<#--                    upload file-->
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                        <div class="form-group" enctype="multipart/form-data">
+                            <div class="input-group mb-3">
 
-                        </div>
-                        <hr>
-                        <ul class="container details">
-                            <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>i.rudberg</p>
-                            </li>
-                            <li><p><span class="glyphicon glyphicon-envelope one"
-                                         style="width:50px;"></span>${user.getEmail()}</p></li>
-                        </ul>
-                        <hr>
-                        <form action="/upload" method="post" enctype="multipart/form-data">
-                            <div class="form-group"
-                                 enctype="multipart/form-data">
-                                <label for="exampleFormControlFile1">Choose a file for avatar</label>
-                                <input name = "file" type="file" accept="image/*,image/jpeg">
+                                <div class="custom-file" enctype="multipart/form-data">
+                                    <input name="file" type="file" class="custom-file-input" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Choose file for avatar</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" name="submit" type="submit"
+                                            value="Push Track">
+                                        Upload
+                                    </button>
+                                </div>
 
-                                <br>
-                                <button class="btn btn-primary" name="submit" type="submit" value="Push Track">Upload</button>
                             </div>
-                        </form>
+                        </div>
+                    </form>
 
-                        <br>
-                        <form action="/exit" method="get">
-                        <a type="button" class="btn btn-secondary btn-lg" href="/exit">Exit</a>
-                        </form>
+<#--                    emal-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text" id="basic-addon1">@</div>
+                        </div>
+                        <div class="form-control" aria-describedby="basic-addon1">${user.getEmail()}</div>
                     </div>
-
+                    <br>
+<#--                    exit-->
+                    <form action="/exit" method="get">
+                    <p class="float-right"><a type="button" class="btn btn-secondary btn-lg" href="/exit">Exit</a></p>
+                    </form>
                 </div>
+
+
             </div>
         </div>
     </div>

@@ -1,3 +1,5 @@
+package Admin;
+
 public class AdminModel {
     Integer id;
     String name;

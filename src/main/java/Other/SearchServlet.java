@@ -1,3 +1,6 @@
+package Other;
+
+import User.UserModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

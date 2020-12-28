@@ -16,11 +16,11 @@
                 <br>
                 <input type="password" class="form-control" name="password" placeholder="******">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-dark">Submit</button>
             <br>
             <br>
             <p>${error}</p>
-            <a href="/register" >В первый раз, да?</a>
+            <a href="/register" class="text-dark">В первый раз, да?</a>
         </div>
     </form>
 

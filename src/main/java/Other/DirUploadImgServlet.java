@@ -1,17 +1,16 @@
+package Other;
 
-
+import User.UserModel;
 import org.apache.commons.io.IOUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebListener;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import javax.sql.DataSource;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -21,7 +20,7 @@ import java.util.UUID;
 
 @WebServlet(urlPatterns = "/upload")
 @MultipartConfig
-public class DirUploadServlet extends HttpServlet {
+public class DirUploadImgServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         DataSource dataSource = (DataSource) request.getServletContext().getAttribute("datasource");

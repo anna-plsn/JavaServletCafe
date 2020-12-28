@@ -1,3 +1,5 @@
+package User;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 @WebFilter(urlPatterns = "/qwer/delete", filterName = "delete")
-public class DeleterFilter implements Filter {
+public class DeleterUserFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

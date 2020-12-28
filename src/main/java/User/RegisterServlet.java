@@ -1,3 +1,5 @@
+package User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -69,6 +71,8 @@ public class RegisterServlet extends HttpServlet {
             } catch (SQLException e) {
                 throw new IllegalStateException(e);
             }
+
+            resp.getWriter().print("<script>alert('Password is incorrect');</script>");
             resp.sendRedirect("/login");
         }
         else {

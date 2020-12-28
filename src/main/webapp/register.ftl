@@ -24,7 +24,8 @@
         <br>
         <input type="password" class="form-control" name="password" placeholder="******">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+    <button type="submit" class="btn btn-dark">Submit</button>
         <br>
         <br>
         <p>${error}</p>

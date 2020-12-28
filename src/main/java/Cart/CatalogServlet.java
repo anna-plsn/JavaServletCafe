@@ -1,3 +1,7 @@
+package Cart;
+
+import Product.ProductModel;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,17 +16,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/productDB")
-public class ProductDbServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/")
+public class CatalogServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("datasource");
-
-        AdminModel adminModel = (AdminModel) req.getSession().getAttribute("adminModel");
-
-        if (adminModel == null || adminModel.getName()==""){
-            resp.sendRedirect("/");
-        }
 
         String query = "SELECT * FROM product";
 
@@ -34,15 +33,20 @@ public class ProductDbServlet extends HttpServlet {
                 String s = resultSet.getString(2);
                 int id = resultSet.getInt("id");
                 String image = resultSet.getString(3);
-                productModels.add(new ProductModel(id, s, image));
+                int price = resultSet.getInt(4);
+                productModels.add(new ProductModel(id, s, image,price));
             }
         }
         catch (SQLException e) {
             throw new IllegalStateException(e);
         }
-
         req.setAttribute("products", productModels);
-        req.getRequestDispatcher("/productDB.ftl").forward(req, resp);
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
     }
 }
+

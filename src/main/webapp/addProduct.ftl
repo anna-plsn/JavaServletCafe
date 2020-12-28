@@ -13,6 +13,13 @@
                 <input type="text" class="form-control" name="name" placeholder="potato">
             </div>
 
+            <div class="form-group">
+                <br>
+                <label for="exampleInputPassword1">Price</label>
+                <br>
+                <input type="text" class="form-control" name="price" placeholder="34">
+            </div>
+
                 <div class="form-group" enctype="multipart/form-data">
                     <label for="exampleFormControlFile1">Choose a file for image catalog</label>
                     <br>

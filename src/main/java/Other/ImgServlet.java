@@ -1,3 +1,5 @@
+package Other;
+
 import org.apache.commons.io.IOUtils;
 
 import javax.imageio.ImageIO;

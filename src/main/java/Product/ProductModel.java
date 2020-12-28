@@ -1,12 +1,16 @@
+package Product;
+
 public class ProductModel {
     int id;
     String name;
     String image;
+    int price;
 
-    public ProductModel(int id, String name, String image) {
+    public ProductModel(int id, String name, String image, int price) {
         this.id = id;
         this.name = name;
         this.image = image;
+        this.price = price;
     }
 
     public ProductModel() {
@@ -18,6 +22,17 @@ public class ProductModel {
 
     public String getName() {
         return this.name;
+    }
+
+    public String getImage() {
+        if (this.image == null) {
+            return "null";
+        }
+        return image;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     public void setId(int id) {
@@ -32,10 +47,7 @@ public class ProductModel {
         this.image = image;
     }
 
-    public String getImage() {
-        if (this.image==null){
-            return "null";
-        }
-        return image;
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

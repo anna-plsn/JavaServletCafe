@@ -1,3 +1,6 @@
+package Product;
+
+import Admin.AdminModel;
 import org.apache.commons.io.IOUtils;
 
 import javax.servlet.ServletException;
@@ -37,8 +40,8 @@ public class AddProductServlet extends HttpServlet {
 
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("datasource");
 
-        String sql = "INSERT INTO product (name,image) VALUES(?,?)";
-        String sql2 = "Select name from user where name=?";
+        String sql = "INSERT INTO product (name,image,price) VALUES(?,?,?)";
+        String sql2 = "Select name from product where name=?";
 
         String uploadDir = "/home/anna/JavaServletExample/image/";
         Part file = req.getPart("file");
@@ -59,7 +62,8 @@ public class AddProductServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         String name = req.getParameter("name");
-        ProductModel productModel = new ProductModel(0, name, images);
+        int price = Integer.parseInt(req.getParameter("price"));
+        ProductModel productModel = new ProductModel(0, name, images, price);
         String error = "";
         Boolean existName = false;
 
@@ -89,6 +93,7 @@ public class AddProductServlet extends HttpServlet {
 
                 statement.setString(1, productModel.name);
                 statement.setString(2,productModel.image);
+                statement.setInt(3, productModel.price);
                 statement.executeUpdate();
 
             } catch (SQLException e) {

@@ -48,6 +48,7 @@
             font-size: 15px;
             font-weight: bold;
         }
+
         .qty .count {
             color: #000;
             display: inline-block;
@@ -55,10 +56,11 @@
             font-size: 25px;
             font-weight: 700;
             line-height: 30px;
-            padding: 0 2px
-        ;min-width: 35px;
+            padding: 0 2px;
+            min-width: 35px;
             text-align: center;
         }
+
         .qty .plus {
             cursor: pointer;
             display: inline-block;
@@ -66,10 +68,11 @@
             color: white;
             width: 30px;
             height: 30px;
-            font: 30px/1 Arial,sans-serif;
+            font: 30px/1 Arial, sans-serif;
             text-align: center;
             border-radius: 50%;
         }
+
         .qty .minus {
             cursor: pointer;
             display: inline-block;
@@ -77,44 +80,51 @@
             color: white;
             width: 30px;
             height: 30px;
-            font: 30px/1 Arial,sans-serif;
+            font: 30px/1 Arial, sans-serif;
             text-align: center;
             border-radius: 50%;
             background-clip: padding-box;
         }
+
         div {
             text-align: center;
         }
-        .minus:hover{
+
+        .minus:hover {
             background-color: #717fe0 !important;
         }
-        .plus:hover{
+
+        .plus:hover {
             background-color: #717fe0 !important;
         }
+
         /*Prevent text selection*/
-        span{
+        span {
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
         }
-        input{
+
+        input {
             border: 0;
             width: 2%;
         }
+
         nput::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
-        input:disabled{
-            background-color:white;
+
+        input:disabled {
+            background-color: white;
         }
     </style>
 </head>
 <body>
 <header>
 
-    <nav class="navbar navbar-expand-sm   navbar-light bg-light">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
                 aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -122,20 +132,25 @@
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/">Catalog<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/register">Register</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
 
             </ul>
+            <form class="form-inline my-2 my-lg-0" method="post" action="/cart">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Cart
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-cart" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                </button>
+            </form>
             <!-- <li class="nav-item dropdown dmenu">
              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                Dropdown link
@@ -173,6 +188,7 @@
                         <img class="card-img-top" src="/img?filename=${product.image}" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-text">I am <c:out value="${product.name}"></c:out></p>
+                           <h5>${product.price} rub<span class="text-small font-weight-normal ml-2">/ am.</span></h5>
                             <form method="post" action="">
                                 <input type="hidden" name="product_id" value="0">
                                 <div class="qty mt-5">
@@ -180,9 +196,9 @@
                                     <input type="number" class="count" name="count" value="0">
                                     <span class="plus bg-dark">+</span>
                                 </div>
-                                <br>
-                                <input src="" class="btn btn-primary btn-block" type="submit" value="Add to cart"
-                                       name="submit">
+                            </form>
+                            <form action="/addToCart" method="get">
+                                <button type="submit" class="btn btn-dark btn-block" name="id" value="${product.id}">Add to cart</button>
                             </form>
                         </div>
                     </div>
@@ -197,6 +213,7 @@
                         <img class="card-img-top" src="/img?filename=${product.image}" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-text">I am <c:out value="${product.name}"></c:out></p>
+                            <h5>${product.price} rub<span class="text-small font-weight-normal ml-2">/ am.</span></h5>
                             <form method="post" action="">
                                 <input type="hidden" name="product_id" value="0">
                                 <div class="qty mt-5">
@@ -204,10 +221,11 @@
                                     <input type="number" class="count" name="count" value="0">
                                     <span class="plus bg-dark">+</span>
                                 </div>
-                                <br>
-                                <input src="" class="btn btn-primary btn-block" type="submit" value="Add to cart"
-                                       name="submit">
                             </form>
+                                <form action="/addToCart" method="get">
+                                    <button type="submit" class="btn btn-dark btn-block" name="id" value="${product.id}">Add to cart</button>
+                                </form>
+
                         </div>
                     </div>
                 </div>
@@ -221,6 +239,7 @@
                         <img class="card-img-top" src="/img?filename=${product.image}" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-text">I am <c:out value="${product.name}"></c:out></p>
+                            <h5>${product.price} rub<span class="text-small font-weight-normal ml-2">/ am.</span></h5>
                             <form method="post" action="">
                                 <input type="hidden" name="product_id" value="0">
                                 <div class="qty mt-5">
@@ -228,10 +247,11 @@
                                     <input type="number" class="count" name="count" value="0">
                                     <span class="plus bg-dark">+</span>
                                 </div>
-                                <br>
-                                <input src="" class="btn btn-primary btn-block" type="submit" value="Add to cart"
-                                       name="submit">
                             </form>
+                                <form action="/addToCart" method="get">
+                                    <button type="submit" class="btn btn-dark btn-block" name="id" value="${product.id}">Add to cart</button>
+                                </form>
+
                         </div>
                     </div>
                 </div>
@@ -258,13 +278,13 @@
 </script>
 
 
-
 <footer class="text-muted">
+
     <div class="container">
         <p class="float-right">
-            <a href="#">Back to top</a>
+            <a href="#" class="text-muted">Back to top</a>
         </p>
-        <p>It is cafe &copy; anna.studio</p>
+        <p class="float-left">It is cafe &copy; anna.studio</p>
     </div>
 </footer>
 </body>
