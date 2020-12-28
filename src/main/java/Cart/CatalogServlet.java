@@ -1,6 +1,7 @@
 package Cart;
 
 import Product.ProductModel;
+import User.UserModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,13 @@ public class CatalogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("datasource");
+
+        UserModel user = (UserModel) req.getSession().getAttribute("user");
+        if (user == null || user.getName()=="") {
+
+            req.setAttribute("user_login", "1");
+            req.getRequestDispatcher("/index.jsp");
+        }
 
         String query = "SELECT * FROM product";
 
