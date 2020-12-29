@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("datasource");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        String sql = "SELECT name, surname, image FROM user WHERE email = '"+email+"' AND password = '"+password+"'";
+        String sql = "SELECT id, name, surname, image FROM user WHERE email = '"+email+"' AND password = '"+password+"'";
 
         String error = "";
 
@@ -36,10 +36,11 @@ public class LoginServlet extends HttpServlet {
 
             ResultSet resultSet = statement.executeQuery();
                 while (resultSet.next()) {
+                    int id = Integer.parseInt(resultSet.getString("id"));
                     String name = resultSet.getString("name");
                     String surname = resultSet.getString("surname");
                     String image = resultSet.getString("image");
-                    UserModel user = new UserModel(0, name, surname, email, "", image);
+                    UserModel user = new UserModel(id, name, surname, email, "", image);
                     req.getSession().setAttribute("user", user);
                 }
 

@@ -1,9 +1,7 @@
 package Cart;
 
-import Product.ProductModel;
 import User.UserModel;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,11 +12,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet(urlPatterns = "/addToCart")
-public class AddToCartServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/pay")
+public class PayServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("datasource");
@@ -35,16 +31,15 @@ public class AddToCartServlet extends HttpServlet {
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
 
-            statement.setInt(1, id_product);
-            statement.setInt(2, user.getId());
-            statement.setInt(3, quantity);
-            statement.setString(4, "0");
+            statement.setString(1, String.valueOf(id_product));
+            statement.setString(2, String.valueOf(user.getId()));
+            statement.setString(3, String.valueOf(quantity));
+            statement.setString(4, "1");
             statement.executeUpdate();
 
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
-        resp.sendRedirect("/?msg=Add to cart");
+        resp.sendRedirect("/?msg=You buy this product");
     }
 }
-

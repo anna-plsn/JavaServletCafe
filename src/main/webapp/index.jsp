@@ -187,7 +187,7 @@
                             </div>
                             <br>
                                 <%--buy and cart buttons--%>
-                            <a href="/addToCart?id=${product.id}&name=${product.name}" class="text-dark" id="buy_link">
+                            <a href="/pay?id=${product.id}" class="text-dark buy_link">
                                 <button class="btn btn-dark btn-block" id="buy_button">Buy now
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-credit-card-2-back" viewBox="0 0 16 16">
@@ -197,7 +197,7 @@
                                 </button>
                             </a>
                             <br>
-                            <a href="/addToCart?id=${product.id}&name=${product.name}" class="text-success" id="cart_link">
+                            <a href="/addToCart?id=${product.id}" class="text-success cart_link">
                                 <button class="btn btn-success btn-block" type="submit" name="id" value="${product.id}">
                                     Add to cart
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
@@ -220,19 +220,33 @@
                         <div class="card-body">
                             <p class="card-text">I am <c:out value="${product.name}"></c:out></p>
                             <h5>${product.price} rub<span class="text-small font-weight-normal ml-2">/ am.</span></h5>
-                            <form method="post" action="">
-                                <input type="hidden" name="product_id" value="0">
-                                <div class="qty mt-5">
-                                    <span class="minus bg-dark">-</span>
-                                    <input type="number" class="count" name="count" value="0">
-                                    <span class="plus bg-dark">+</span>
-                                </div>
-                            </form>
-                            <form action="/addToCart" method="get">
-                                <button type="submit" class="btn btn-dark btn-block" name="id" value="${product.id}">Add
-                                    to cart
+
+                            <input type="hidden" name="product_id" value="0">
+                            <div class="qty mt-5">
+                                <span class="minus bg-dark">-</span>
+                                <input type="number" class="count" name="count" value="0">
+                                <span class="plus bg-dark">+</span>
+                            </div>
+                            <br>
+                            <a href="/pay?id=${product.id}" class="text-dark buy_link">
+                                <button class="btn btn-dark btn-block" id="buy_button">Buy now
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-credit-card-2-back" viewBox="0 0 16 16">
+                                        <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1z"/>
+                                        <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm13 2v5H1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm-1 9H2a1 1 0 0 1-1-1v-1h14v1a1 1 0 0 1-1 1z"/>
+                                    </svg>
                                 </button>
-                            </form>
+                            </a>
+                            <br>
+                            <a href="/addToCart?id=${product.id}" class="text-success cart_link">
+                                <button class="btn btn-success btn-block" type="submit" name="id" value="${product.id}">
+                                    Add to cart
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                         fill="currentColor" class="bi bi-cart" viewBox="0 0 18 18">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                    </svg>
+                                </button>
+                            </a>
 
                         </div>
                     </div>
@@ -247,19 +261,33 @@
                         <div class="card-body">
                             <p class="card-text">I am <c:out value="${product.name}"></c:out></p>
                             <h5>${product.price} rub<span class="text-small font-weight-normal ml-2">/ am.</span></h5>
-                            <form method="post" action="">
-                                <input type="hidden" name="product_id" value="0">
-                                <div class="qty mt-5">
-                                    <span class="minus bg-dark">-</span>
-                                    <input type="number" class="count" name="count" value="0">
-                                    <span class="plus bg-dark">+</span>
-                                </div>
-                            </form>
-                            <form action="/addToCart" method="get">
-                                <button type="submit" class="btn btn-dark btn-block" name="id" value="${product.id}">Add
-                                    to cart
+
+                            <input type="hidden" name="product_id" value="0">
+                            <div class="qty mt-5">
+                                <span class="minus bg-dark">-</span>
+                                <input type="number" class="count" name="count" value="0">
+                                <span class="plus bg-dark">+</span>
+                            </div>
+                            <br>
+                            <a href="/pay?id=${product.id}" class="text-dark buy_link">
+                                <button class="btn btn-dark btn-block" id="buy_button">Buy now
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-credit-card-2-back" viewBox="0 0 16 16">
+                                        <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1z"/>
+                                        <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm13 2v5H1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm-1 9H2a1 1 0 0 1-1-1v-1h14v1a1 1 0 0 1-1 1z"/>
+                                    </svg>
                                 </button>
-                            </form>
+                            </a>
+                            <br>
+                            <a href="/addToCart?id=${product.id}" class="text-success cart_link">
+                                <button class="btn btn-success btn-block" type="submit" name="id" value="${product.id}">
+                                    Add to cart
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                         fill="currentColor" class="bi bi-cart" viewBox="0 0 18 18">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                    </svg>
+                                </button>
+                            </a>
 
                         </div>
                     </div>
@@ -276,20 +304,47 @@
         $('.count').prop('disabled', true);
         $(document).on('click', '.plus', function () {
             $(this).prev().val(+$(this).prev().val() + 1);
-
         });
         $(document).on('click', '.minus', function () {
             if ($(this).next().val() > 0) $(this).next().val(+$(this).next().val() - 1);
         });
     });
     $(function() {
-        $('#buy_link').each(function (){
-            $('#buy_link').click(function () {
-                $('#buy_link').attr("href", $('#buy_link').attr("href") + "&quantity=" + $('.plus').prev().val());
-            });
-        });
+        $('.buy_link').each(function(j,element) {
+            $(this).click(function () {
+                var inputs = $('input[name ="count"]');
+                var value = 0;
+                for(var i = 0; i < inputs.length; i++){
+                    // console.log($(inputs[i]).val() + " j:" + j);
 
-});
+                    if(j == i){
+                        value = $(inputs[i]).val();
+                        // console.log(value);
+                    }
+                }
+                $(this).attr("href", $(this).attr("href") + "&quantity=" + value);
+
+            });
+
+        });
+        $('.cart_link').each(function(j,element) {
+            $(this).click(function () {
+                var inputs = $('input[name ="count"]');
+                var value = 0;
+                for(var i = 0; i < inputs.length; i++){
+                    // console.log($(inputs[i]).val() + " j:" + j);
+
+                    if(j == i){
+                        value = $(inputs[i]).val();
+                        // console.log(value);
+                    }
+                }
+                $(this).attr("href", $(this).attr("href") + "&quantity=" + value);
+
+            });
+
+        });
+    });
 </script>
 <%--footer information adn link to top--%>
 <footer class="text-muted">
@@ -302,4 +357,7 @@
     </div>
 </footer>
 </body>
+<%if(request.getParameter("msg") != null){%>
+<script>alert('<%= request.getParameter("msg") %>');</script>
+    <%}; %>
 </html>
