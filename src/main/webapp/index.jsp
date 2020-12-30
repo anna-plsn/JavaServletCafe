@@ -178,7 +178,7 @@
                         <img class="card-img-top" src="/img?filename=${product.image}" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-text">I am <c:out value="${product.name}"></c:out></p>
-                            <h5>${product.price} rub<span class="text-small font-weight-normal ml-2">/ am.</span></h5>
+                            <h5>${product.price} <span class="text-small font-weight-normal ml-2">rub / am.</span></h5>
                             <input type="hidden" name="product_id" value="0">
                             <div class="qty mt-5">
                                 <span class="minus bg-dark">-</span>
@@ -219,7 +219,7 @@
                         <img class="card-img-top" src="/img?filename=${product.image}" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-text">I am <c:out value="${product.name}"></c:out></p>
-                            <h5>${product.price} rub<span class="text-small font-weight-normal ml-2">/ am.</span></h5>
+                            <h5>${product.price} <span class="text-small font-weight-normal ml-2">rub / am.</span></h5>
 
                             <input type="hidden" name="product_id" value="0">
                             <div class="qty mt-5">
@@ -260,7 +260,7 @@
                         <img class="card-img-top" src="/img?filename=${product.image}" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-text">I am <c:out value="${product.name}"></c:out></p>
-                            <h5>${product.price} rub<span class="text-small font-weight-normal ml-2">/ am.</span></h5>
+                            <h5>${product.price} <span class="text-small font-weight-normal ml-2">rub / am.</span></h5>
 
                             <input type="hidden" name="product_id" value="0">
                             <div class="qty mt-5">

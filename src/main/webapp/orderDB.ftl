@@ -1,12 +1,30 @@
 <#ftl encoding="UTF-8"/>
 
-<#import "base.ftl" as base>
+<#import "admin.ftl" as admin>
+<@admin.main css = ["style"]>
 
-<@base.main css = ["style"]>
     <br>
-    <h1 class="text-center"> Your cart </h1>
-    <div class="pb-5">
-        <div class="container">
+    <div class="container">
+        <form method="post" action="/tableOrderDB">
+        <div class="input-group">
+
+                <select class="custom-select" id="inputGroupSelect04" name="id">
+                    <option selected>Choose user...</option>
+                    <#list users as user>
+                        <option class="option" value="${user.getId()}">${user.getName()} ${user.getSurname()} |
+                            email: ${user.getEmail()}</option>
+                    </#list>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Get orders</button>
+                </div>
+
+        </div>
+        </form>
+
+
+    <br>
+
             <div class="row">
                 <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
 
@@ -24,9 +42,6 @@
                                 <th scope="col" class="border-0 bg-light">
                                     <div class="py-2 text-uppercase">Quantity</div>
                                 </th>
-                                <th scope="col" class="border-0 bg-light">
-                                    <div class="py-2 text-uppercase">Remove</div>
-                                </th>
                             </tr>
                             </thead>
                             <#list carts as cart>
@@ -41,12 +56,10 @@
                                             </div>
                                         </div>
                                     </th>
-                                    <td class="border-0 align-middle"><strong>${cart.getPrice()}  <span class="text-small font-weight-normal ml-2">rub / am.</span></strong></td>
+                                    <td class="border-0 align-middle"><strong>${cart.getPrice()} <span
+                                                    class="text-small font-weight-normal ml-2">rub / am.</span></strong>
+                                    </td>
                                     <td class="border-0 align-middle"><strong>${cart.getQuantity()}</strong></td>
-                                    <td class="border-0 align-middle"><a
-                                                href="/deleteCart?id_product=${cart.getId_product()}&id_user=${user.getId()}"
-                                                class="text-dark"><i
-                                                    class="fa fa-trash"></i></a></td>
                                 </tr>
 
                                 </tbody>
@@ -54,13 +67,9 @@
                         </table>
                     </div>
                     <br>
-                    <h3 class="text-center" >${empty_cart}</h3>
-                    <br>
-                    <a href="/checkout"
-                       class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
                     <!-- End -->
                 </div>
             </div>
         </div>
-    </div>
-</@base.main>
+
+</@admin.main>

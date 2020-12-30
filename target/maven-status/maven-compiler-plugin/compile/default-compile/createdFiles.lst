@@ -15,6 +15,7 @@ Product/ProductModel.class
 User/RegisterServlet.class
 Cart/CartModel.class
 Cart/DeleteCartFilter.class
+Admin/UserOrderDbServlet.class
 Other/GlobalListener.class
 Admin/AdminModel.class
 User/LoginServlet.class
@@ -22,4 +23,5 @@ Product/DeleteProductFilter.class
 User/DeleterUserFilter.class
 Cart/CatalogServlet.class
 Cart/CheckoutServlet.class
+Admin/OrderDbServlet.class
 Product/ProductDbServlet.class

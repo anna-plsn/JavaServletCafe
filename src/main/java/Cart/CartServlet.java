@@ -23,37 +23,43 @@ public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("datasource");
 
+        String empty_cart = "";
+
         UserModel user = (UserModel) req.getSession().getAttribute("user");
-        if (user == null || user.getName()=="") {
+        if (user == null || user.getName() == "") {
             resp.sendRedirect("/catalog");
         }
 
         String query = "select user_order.id_product, product.name, product.price, sum(user_order.quantity) as sum from product left join " +
-                "user_order on user_order.id_product = product.id where user_order.id_user='"+user.getId()+"' and user_order.paid='0' group by product.id;";
+                "user_order on user_order.id_product = product.id where user_order.id_user='" + user.getId() + "' and user_order.paid='0' group by product.id;";
 
         List<CartModel> cartModels = new ArrayList<>();
 
-        try(Connection connection = dataSource.getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
+        try (Connection connection = dataSource.getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int id_product = resultSet.getInt(1);
                 String name = resultSet.getString(2);
                 int price = resultSet.getInt(3);
                 int quantity = resultSet.getInt(4);
-                cartModels.add(new CartModel(id_product ,name, price, quantity));
+                cartModels.add(new CartModel(id_product, name, price, quantity));
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
 
+        if (cartModels.isEmpty()) {
+            empty_cart = "Your shopping cart is empty";
+        }
+        req.setAttribute("empty_cart", empty_cart);
         req.setAttribute("carts", cartModels);
         req.getRequestDispatcher("/cart.ftl").forward(req, resp);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
+        String empty_cart = "";
+        req.setAttribute("empty_cart", empty_cart);
+        req.getRequestDispatcher("/cart.ftl").forward(req, resp);
     }
 }

@@ -2,6 +2,7 @@
 /home/anna/JavaServletExample/src/main/java/Cart/DeleteCartFilter.java
 /home/anna/JavaServletExample/src/main/java/Other/ExitUserServlet.java
 /home/anna/JavaServletExample/src/main/java/Admin/AdminLoginServlet.java
+/home/anna/JavaServletExample/src/main/java/Admin/UserOrderDbServlet.java
 /home/anna/JavaServletExample/src/main/java/Cart/CheckoutServlet.java
 /home/anna/JavaServletExample/src/main/java/User/UserDBServlet.java
 /home/anna/JavaServletExample/src/main/java/Product/DeleteProductFilter.java
@@ -23,3 +24,4 @@
 /home/anna/JavaServletExample/src/main/java/Product/AddProductServlet.java
 /home/anna/JavaServletExample/src/main/java/User/DeleterUserFilter.java
 /home/anna/JavaServletExample/src/main/java/Cart/CartServlet.java
+/home/anna/JavaServletExample/src/main/java/Admin/OrderDbServlet.java

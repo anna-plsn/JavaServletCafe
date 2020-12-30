@@ -36,24 +36,14 @@
                         <a class="nav-link" href="/productDB">Product database</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/orderDB">Order database</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/exitAdmin">Exit</a>
                     </li>
 
                 </ul>
 
-                <!-- <li class="nav-item dropdown dmenu">
-                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                   Dropdown link
-                 </a>
-                 <div class="dropdown-menu sm-menu">
-                   <a class="dropdown-item" href="#">Link 1</a>
-                   <a class="dropdown-item" href="#">Link 2</a>
-                   <a class="dropdown-item" href="#">Link 3</a>
-                   <a class="dropdown-item" href="#">Link 4</a>
-                   <a class="dropdown-item" href="#">Link 5</a>
-                   <a class="dropdown-item" href="#">Link 6</a>
-                 </div>
-               </li> -->
             </div>
         </nav>
     </header>
