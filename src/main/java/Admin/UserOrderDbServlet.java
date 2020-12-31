@@ -17,17 +17,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    List of users for dropdown list
+ */
 @WebServlet(urlPatterns = ("/orderDB"))
 public class UserOrderDbServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AdminModel adminModel = (AdminModel) req.getSession().getAttribute("adminModel");
-
-        if (adminModel == null || adminModel.getName()==""){
-            resp.sendRedirect("/");
-        }
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("datasource");
 
+        //        check for admin session
+        AdminModel adminModel = (AdminModel) req.getSession().getAttribute("adminModel");
+        if (adminModel == null || adminModel.getName() == "") {
+            resp.sendRedirect("/");
+        }
+
+//        list of users for dropdown list and session
         String sql = "select id, name, surname, email from user;";
 
         List<UserModel> userModels = new ArrayList<>();
@@ -44,12 +49,13 @@ public class UserOrderDbServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
-        List<CartModel> cartModels = new ArrayList<>();
-
+        req.setAttribute("users", userModels);
         req.getSession().setAttribute("users", userModels);
 
+//        prevent error of null cartModel
+        List<CartModel> cartModels = new ArrayList<>();
         req.setAttribute("carts", cartModels);
-        req.setAttribute("users", userModels);
+
         req.getRequestDispatcher("/orderDB.ftl").forward(req, resp);
     }
 

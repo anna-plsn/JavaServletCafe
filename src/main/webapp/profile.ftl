@@ -27,118 +27,135 @@
         }
 
     </style>
+
+<#--    profile-->
     <div class="album py-5 bg-light">
         <div class="container">
 
-                <div class="card p-3" id="profile">
-                    <div class="d-flex align-items-center">
-                        <div class="image">
+            <div class="card p-3" id="profile">
+                <div class="d-flex align-items-center">
+                    <div class="image">
 
-                            <#--image upload-->
-                            <div class="profile-img">
-                                <img alt="User Pic" src="/img?filename=${user.getImage()}" id="profile-image1"
-                                     class="rounded" width="370">
-                            </div>
-                            <br>
-                            <h2>${user.getSurname()}</h2> <span>${user.getName()}</span>
-                            <br><br>
+                        <#--image upload-->
+                        <div class="profile-img">
+                            <img alt="User Pic" src="/img?filename=${user.getImage()}" id="profile-image1"
+                                 class="rounded" width="370">
+                        </div>
+                        <br>
 
-                            <#--                    upload file-->
-                            <form action="/upload" method="post" enctype="multipart/form-data">
-                                <div class="form-group" enctype="multipart/form-data">
-                                    <div class="input-group mb-3">
+                        <#--                            user surname-->
+                        <h2>${user.getSurname()}</h2>
 
-                                        <div class="custom-file" enctype="multipart/form-data">
-                                            <input name="file" type="file" class="custom-file-input" id="customFile">
-                                            <label class="custom-file-label" for="customFile">Choose file for
-                                                avatar</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" name="submit" type="submit"
-                                                    value="Push Track">
-                                                Upload
-                                            </button>
-                                        </div>
+                        <#--                            user name-->
+                        <span>${user.getName()}</span>
+                        <br><br>
 
+                        <#--                    upload file-->
+                        <form action="/upload" method="post" enctype="multipart/form-data">
+                            <div class="form-group" enctype="multipart/form-data">
+                                <div class="input-group mb-3">
+                                    <div class="custom-file" enctype="multipart/form-data">
+                                        <input name="file" type="file" class="custom-file-input" id="customFile">
+                                        <label class="custom-file-label" for="customFile">Choose file for
+                                            avatar</label>
                                     </div>
-                                </div>
-                            </form>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" name="submit" type="submit"
+                                                value="Push Track">
+                                            Upload
+                                        </button>
+                                    </div>
 
-                            <#--                    emal-->
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text" id="basic-addon1">@</div>
                                 </div>
-                                <div class="form-control" aria-describedby="basic-addon1">${user.getEmail()}</div>
                             </div>
-                            <br>
-                            <#--                    exit-->
-                            <form action="/exit" method="get">
-                                <p class="float-right"><a type="button" class="btn btn-secondary btn-lg" href="/exit">Exit</a>
-                                </p>
-                            </form>
+                        </form>
+
+                        <#--                    emal-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" id="basic-addon1">@</div>
+                            </div>
+                            <div class="form-control" aria-describedby="basic-addon1">${user.getEmail()}</div>
                         </div>
+                        <br>
 
-
+                        <#--                    exit-->
+                        <form action="/exit" method="get">
+                            <p class="float-right"><a type="button" class="btn btn-secondary btn-lg"
+                                                      href="/exit">Exit</a>
+                            </p>
+                        </form>
                     </div>
                 </div>
+            </div>
+            <br>
 
-                <br>
+            <#--table of buy-->
+            <div class="pb-5" id="items">
 
-                <div class="pb-5" id="items">
+                <div class="row">
+                    <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
 
-                    <div class="row">
-                        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                        <#--                        name of table-->
+                        <h2 class="text-center">Your purchased items </h2>
+                        <br>
 
-                            <h2 class="text-center">Your purchased items </h2>
-                            <br>
-                            <!-- Shopping cart table -->
-                            <div class="table-responsive">
-                                <table class="table">
+                        <!-- Shopping cart table -->
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <#--                                    product-->
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="p-2 px-3 text-uppercase">Product</div>
+                                    </th>
 
-                                    <thead>
+                                    <#--                                    price-->
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Price</div>
+                                    </th>
+
+                                    <#--                                    quantity-->
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Quantity</div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <#list carts as cart>
+                                    <tbody>
                                     <tr>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="p-2 px-3 text-uppercase">Product</div>
-                                        </th>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Price</div>
-                                        </th>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Quantity</div>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <#list carts as cart>
-                                        <tbody>
-                                        <tr>
 
-                                            <th scope="row" class="border-0">
-                                                <div class="p-2">
-                                                    <div class="ml-3 d-inline-block align-middle">
-                                                        <h5 class="mb-0"> ${cart.getName()}</h5>
-                                                    </div>
+                                        <#--product name-->
+                                        <th scope="row" class="border-0">
+                                            <div class="p-2">
+                                                <div class="ml-3 d-inline-block align-middle">
+                                                    <h5 class="mb-0"> ${cart.getName()}</h5>
                                                 </div>
-                                            </th>
-                                            <td class="border-0 align-middle"><strong>${cart.getPrice()} <span
-                                                            class="text-small font-weight-normal ml-2">rub / am.</span></strong>
-                                            </td>
-                                            <td class="border-0 align-middle"><strong>${cart.getQuantity()}</strong>
-                                            </td>
-                                        </tr>
+                                            </div>
+                                        </th>
 
-                                        </tbody>
-                                    </#list>
-                                </table>
-                                <br>
-                                <h3 class="text-center">${empty_paid}</h3>
-                                <br>
-                            </div>
-                            <!-- End -->
+                                        <#--                                        product price-->
+                                        <td class="border-0 align-middle"><strong>${cart.getPrice()} <span
+                                                        class="text-small font-weight-normal ml-2">rub / am.</span></strong>
+                                        </td>
+
+                                        <#--                                        product quantity-->
+                                        <td class="border-0 align-middle"><strong>${cart.getQuantity()}</strong>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </#list>
+                            </table>
+                            <br>
+
+                            <#--                            info for user about empty paid-->
+                            <h3 class="text-center">${empty_paid}</h3>
+                            <br>
                         </div>
+                        <!-- End -->
                     </div>
                 </div>
-
+            </div>
         </div>
     </div>
 </@base.main>

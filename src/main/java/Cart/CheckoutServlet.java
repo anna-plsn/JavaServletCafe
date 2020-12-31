@@ -12,7 +12,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
+/*
+    Buy products from cart
+ */
 @WebServlet(urlPatterns = "/checkout")
 public class CheckoutServlet extends HttpServlet {
     @Override
@@ -25,13 +27,13 @@ public class CheckoutServlet extends HttpServlet {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-
             statement.setInt(1, Integer.valueOf(user.getId()));
             statement.executeUpdate();
 
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+
         resp.sendRedirect("/catalog");
     }
 }

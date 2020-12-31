@@ -16,13 +16,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+    Paid products for specific user
+ */
 @WebServlet(urlPatterns = ("/tableOrderDB"))
 public class OrderDbServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AdminModel adminModel = (AdminModel) req.getSession().getAttribute("adminModel");
 
+//        check for admin session
+        AdminModel adminModel = (AdminModel) req.getSession().getAttribute("adminModel");
         if (adminModel == null || adminModel.getName()==""){
             resp.sendRedirect("/");
         }
@@ -33,15 +36,14 @@ public class OrderDbServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("datasource");
 
-
+//        list of users for dropdown list
         List<UserModel> userModels = (List<UserModel>) req.getSession().getAttribute("users");
-
         req.setAttribute("users", userModels);
 
+//        table of paid products for specific user
         int id_user = Integer.parseInt(req.getParameter("id"));
         String sql = "select user_order.id_product, product.name, product.price, sum(user_order.quantity) as sum from product left join " +
-                "user_order on user_order.id_product = product.id where user_order.id_user='"+id_user+"' and user_order.paid='1' group by product.id;";;
-
+                "user_order on user_order.id_product = product.id where user_order.id_user='"+id_user+"' and user_order.paid='1' group by product.id;";
 
         List<CartModel> cartModels = new ArrayList<>();
 
@@ -57,7 +59,6 @@ public class OrderDbServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
-
 
         req.setAttribute("carts", cartModels);
         req.getRequestDispatcher("/orderDB.ftl").forward(req, resp);

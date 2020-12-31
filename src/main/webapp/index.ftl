@@ -16,14 +16,14 @@
             </tr>
             <#list users as user>
 
-            <tr>
-                <td>${user.getName()}</td>
-                <td>${user.getSurname()!"null"}</td>
-                <td>${user.getEmail()!"null"}</td>
-                <td>${user.getPassword()!"null"}</td>
-                <td>${user.getImage()!"null"}</td>
-                <td><a href="/qwer/delete?id=${user.getId()}">Delete</a></td>
-            </tr>
+                <tr>
+                    <td>${user.getName()}</td>
+                    <td>${user.getSurname()!"null"}</td>
+                    <td>${user.getEmail()!"null"}</td>
+                    <td>${user.getPassword()!"null"}</td>
+                    <td>${user.getImage()!"null"}</td>
+                    <td><a href="/qwer/delete?id=${user.getId()}">Delete</a></td>
+                </tr>
             </#list>
         </table>
 

@@ -6,13 +6,14 @@ public class CartModel {
     int price;
     int quantity;
 
-    public CartModel(int id_product, String name, int price, int quantity){
+    public CartModel(int id_product, String name, int price, int quantity) {
         this.id_product = id_product;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
     }
-    public  CartModel(){
+
+    public CartModel() {
 
     }
 

@@ -1,6 +1,5 @@
 package Cart;
 
-import Admin.AdminModel;
 import User.UserModel;
 
 import javax.servlet.ServletException;
@@ -17,19 +16,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    Show cart for user
+ */
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("datasource");
 
-        String empty_cart = "";
-
+        //        check for user session
         UserModel user = (UserModel) req.getSession().getAttribute("user");
         if (user == null || user.getName() == "") {
             resp.sendRedirect("/catalog");
         }
 
+//        info for user about empty cart
+        String empty_cart = "";
+
+//        Show cart for user
         String query = "select user_order.id_product, product.name, product.price, sum(user_order.quantity) as sum from product left join " +
                 "user_order on user_order.id_product = product.id where user_order.id_user='" + user.getId() + "' and user_order.paid='0' group by product.id;";
 
@@ -47,17 +52,20 @@ public class CartServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+        req.setAttribute("carts", cartModels);
 
+//        info for user about empty cart
         if (cartModels.isEmpty()) {
             empty_cart = "Your shopping cart is empty";
         }
         req.setAttribute("empty_cart", empty_cart);
-        req.setAttribute("carts", cartModels);
+
         req.getRequestDispatcher("/cart.ftl").forward(req, resp);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //        info for user about empty cart
         String empty_cart = "";
         req.setAttribute("empty_cart", empty_cart);
         req.getRequestDispatcher("/cart.ftl").forward(req, resp);

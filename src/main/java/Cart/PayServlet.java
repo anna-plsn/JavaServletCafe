@@ -13,16 +13,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/*
+    Buy product from catalog
+ */
 @WebServlet(urlPatterns = "/pay")
 public class PayServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("datasource");
+
         int id_product = Integer.parseInt(req.getParameter("id"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
 
+        //        check for user session
         UserModel user = (UserModel) req.getSession().getAttribute("user");
-        if (user == null || user.getName()=="") {
+        if (user == null || user.getName() == "") {
             resp.sendRedirect("/catalog");
         }
 
@@ -40,6 +45,8 @@ public class PayServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
+
+//        info for user about success payment
         resp.sendRedirect("/?msg=You buy this product");
     }
 }

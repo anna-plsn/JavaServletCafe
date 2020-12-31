@@ -13,24 +13,28 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/*
+    Uploading image service
+ */
 @WebServlet(urlPatterns = "/img")
 public class ImgServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         final String UPLOAD_DIR = "/home/anna/JavaServletExample/image";
         String filename = req.getParameter("filename");
 
-        int x = 0,y=0;
+//        cut image
+        int x = 0, y = 0;
         BufferedImage originalImage = ImageIO.read(new File(UPLOAD_DIR + File.separator + filename));
-        if (originalImage.getWidth()>=originalImage.getHeight()){
-            x = (originalImage.getWidth()-originalImage.getHeight())/2;
-        }else {
-            y = (originalImage.getHeight()-originalImage.getWidth())/2;
+        if (originalImage.getWidth() >= originalImage.getHeight()) {
+            x = (originalImage.getWidth() - originalImage.getHeight()) / 2;
+        } else {
+            y = (originalImage.getHeight() - originalImage.getWidth()) / 2;
         }
+        BufferedImage subImage = originalImage.getSubimage(x, y, originalImage.getWidth() - 2 * x, originalImage.getHeight() - 2 * y);
 
-        BufferedImage subImage = originalImage.getSubimage(x, y, originalImage.getWidth()-2*x, originalImage.getHeight()-2*y);
-
-
+//        upload image
         File outputFile = new File(UPLOAD_DIR + File.separator + filename);
         ImageIO.write(subImage, "png", outputFile);
 

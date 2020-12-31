@@ -12,54 +12,61 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+    Register for user
+ */
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //        show error about existing email
         String error = "";
         req.setAttribute("error", error);
-    req.getRequestDispatcher("/register.ftl" ).forward(req,resp);
+        req.getRequestDispatcher("/register.ftl").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         DataSource dataSource = (DataSource) req.getServletContext().getAttribute("datasource");
-        String sql = "INSERT INTO user (name, surname, email, password, image) VALUES( ?,?,?,?,?)";
-        String sql2 = "Select email from user where email=?";
+
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        UserModel user = new UserModel(0, name, surname, email, password,"");
+        UserModel user = new UserModel(0, name, surname, email, password, "");
+
+        //        show error about existing email
         String error = "";
         Boolean existEmail = false;
 
+//        find exist email
+        String sql2 = "Select email from user where email=?";
 
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql2)) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql2)) {
 
             statement.setString(1, user.getEmail());
             ResultSet resultSet = statement.executeQuery();
             String s = null;
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 s = resultSet.getString("email");
             }
-
-            if (s != null){
+            if (s != null) {
                 existEmail = true;
             }
-
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
 
+        //        show error about existing email
         if (!existEmail) {
+
+//            register user
+            String sql = "INSERT INTO user (name, surname, email, password, image) VALUES( ?,?,?,?,?)";
+
             try (Connection connection = dataSource.getConnection();
                  PreparedStatement statement = connection.prepareStatement(sql)) {
-
 
                 statement.setString(1, user.name);
                 statement.setString(2, user.surname);
@@ -71,11 +78,8 @@ public class RegisterServlet extends HttpServlet {
             } catch (SQLException e) {
                 throw new IllegalStateException(e);
             }
-
-            resp.getWriter().print("<script>alert('Password is incorrect');</script>");
             resp.sendRedirect("/login");
-        }
-        else {
+        } else {
             error = "Такой email уже существует";
             req.setAttribute("error", error);
             req.getRequestDispatcher("/register.ftl").forward(req, resp);

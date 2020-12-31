@@ -17,39 +17,57 @@ public class UserModel {
         this.image = image;
     }
 
-    public  UserModel(){
+    public UserModel() {
 
     }
-    public int getId() { return this.id; }
-    public String getName(){
+
+    public int getId() {
+        return this.id;
+    }
+
+    public String getName() {
         return this.name;
     }
-    public String getSurname(){
+
+    public String getSurname() {
         return this.surname;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return this.email;
     }
-    public String getPassword(){
+
+    public String getPassword() {
         return this.password;
     }
+
     public String getImage() {
-        if (this.image==null){
+        if (this.image == null) {
             return "null";
         }
         return image;
     }
 
 
-    public void setId(int id) { this.id = id; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public void setSurname(String surname) { this.surname = surname; }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
-    public void setEmail(String email) { this.email = email; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public void setPassword(String password) { this.password = password; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public void setImage(String image) {
 

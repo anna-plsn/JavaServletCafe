@@ -1,6 +1,9 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,500,500i,700,800i" rel="stylesheet">
 <!------ Include the above in your HEAD tag ---------->
 
 <html>
@@ -8,9 +11,7 @@
     <title>Ann's cafe</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,500i,700,800i" rel="stylesheet">
+
     <style>
         p {
             color: black;
@@ -123,7 +124,8 @@
 </head>
 <body>
 <header>
-    <%--navbar--%>
+
+    <%--    navbar--%>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
                 aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,16 +133,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+                <%--                Catalog--%>
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Catalog<span class="sr-only">(current)</span></a>
                 </li>
+
+                <%--    Lodin--%>
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
+
+                <%--    Profile--%>
                 <li class="nav-item">
                     <a class="nav-link" href="/profile">Profile</a>
                 </li>
             </ul>
+
+            <%--            button cart--%>
             <form class="form-inline my-2 my-lg-0" method="post" action="/cart">
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Cart
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -152,84 +162,121 @@
         </div>
     </nav>
 
+    <%--end navbar--%>
 </header>
+
 <%--jsp-code for loop --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--label--%>
 <h1 class="elegant">Welcome to our cafe!</h1>
-<% if (request.getAttribute("user_login")=="1"){%>
+
+<%--info for unregister user--%>
+<% if (request.getAttribute("user_login") == "1") {%>
 <div class="alert alert-warning">
     You can't buy any products, because you are not logged in. Please, login or register
 </div>
-<% };%>
+<% }
+    ;%>
+
+<%--jsp-code for loop --%>
 <%
     int i = 0;
 %>
+
 <%--items for catalog--%>
 <div class="album py-5 bg-light">
     <div class="container">
+
+        <%--jsp-code for loop --%>
         <c:forEach var="product" items="${products}">
             <%i = i + 1;%>
             <% if (i % 3 == 1) {%>
+
             <%--first column--%>
             <div class="row">
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
+
+                            <%--                        image for product--%>
                         <img class="card-img-top" src="/img?filename=${product.image}" alt="Card image cap">
                         <div class="card-body">
+
+                                <%--                            Product name--%>
                             <p class="card-text">I am <c:out value="${product.name}"></c:out></p>
+
+                                <%--    product price--%>
                             <h5>${product.price} <span class="text-small font-weight-normal ml-2">rub / am.</span></h5>
                             <input type="hidden" name="product_id" value="0">
+
+                                <%--    plus and minus quantity--%>
                             <div class="qty mt-5">
                                 <span class="minus bg-dark">-</span>
                                 <input type="number" class="count" name="count" value="0">
                                 <span class="plus bg-dark">+</span>
                             </div>
                             <br>
-                                <%--buy and cart buttons--%>
+
+                                <%--buy button--%>
                             <a href="/pay?id=${product.id}" class="text-dark buy_link">
-                                <button class="btn btn-dark btn-block" id="buy_button">Buy now
+                                <button class="btn btn-dark btn-block">Buy now
+                                        <%--                                    svg--%>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-credit-card-2-back" viewBox="0 0 16 16">
                                         <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1z"/>
                                         <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm13 2v5H1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm-1 9H2a1 1 0 0 1-1-1v-1h14v1a1 1 0 0 1-1 1z"/>
                                     </svg>
+
                                 </button>
                             </a>
                             <br>
+
+                                <%--    Add to cart button--%>
                             <a href="/addToCart?id=${product.id}" class="text-success cart_link">
                                 <button class="btn btn-success btn-block" type="submit" name="id" value="${product.id}">
                                     Add to cart
+                                        <%--                                    svg--%>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                          fill="currentColor" class="bi bi-cart" viewBox="0 0 18 18">
                                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                                     </svg>
+
                                 </button>
                             </a>
-
                         </div>
                     </div>
                 </div>
                 <% }
                     ;%>
+
                     <%--second column--%>
                 <% if (i % 3 == 2) {%>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
+
+                            <%--                        image for product--%>
                         <img class="card-img-top" src="/img?filename=${product.image}" alt="Card image cap">
                         <div class="card-body">
-                            <p class="card-text">I am <c:out value="${product.name}"></c:out></p>
-                            <h5>${product.price} <span class="text-small font-weight-normal ml-2">rub / am.</span></h5>
 
+                                <%--                            Product name--%>
+                            <p class="card-text">I am <c:out value="${product.name}"></c:out></p>
+
+                                <%--    product price--%>
+                            <h5>${product.price} <span class="text-small font-weight-normal ml-2">rub / am.</span></h5>
                             <input type="hidden" name="product_id" value="0">
+
+                                <%--    plus and minus quantity--%>
                             <div class="qty mt-5">
                                 <span class="minus bg-dark">-</span>
                                 <input type="number" class="count" name="count" value="0">
                                 <span class="plus bg-dark">+</span>
                             </div>
                             <br>
+
+                                <%--buy button--%>
                             <a href="/pay?id=${product.id}" class="text-dark buy_link">
-                                <button class="btn btn-dark btn-block" id="buy_button">Buy now
+                                <button class="btn btn-dark btn-block">Buy now
+                                        <%--                                    svg--%>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-credit-card-2-back" viewBox="0 0 16 16">
                                         <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1z"/>
@@ -238,9 +285,12 @@
                                 </button>
                             </a>
                             <br>
+
+                                <%--    Add to cart button--%>
                             <a href="/addToCart?id=${product.id}" class="text-success cart_link">
                                 <button class="btn btn-success btn-block" type="submit" name="id" value="${product.id}">
                                     Add to cart
+                                        <%--                                    svg--%>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                          fill="currentColor" class="bi bi-cart" viewBox="0 0 18 18">
                                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
@@ -253,24 +303,35 @@
                 </div>
                 <% }
                     ;%>
+
                     <%--third column--%>
                 <% if (i % 3 == 0) {%>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
+
+                            <%--                        image for product--%>
                         <img class="card-img-top" src="/img?filename=${product.image}" alt="Card image cap">
                         <div class="card-body">
-                            <p class="card-text">I am <c:out value="${product.name}"></c:out></p>
-                            <h5>${product.price} <span class="text-small font-weight-normal ml-2">rub / am.</span></h5>
 
+                                <%--                            Product name--%>
+                            <p class="card-text">I am <c:out value="${product.name}"></c:out></p>
+
+                                <%--    product price--%>
+                            <h5>${product.price} <span class="text-small font-weight-normal ml-2">rub / am.</span></h5>
                             <input type="hidden" name="product_id" value="0">
+
+                                <%--    plus and minus quantity--%>
                             <div class="qty mt-5">
                                 <span class="minus bg-dark">-</span>
                                 <input type="number" class="count" name="count" value="0">
                                 <span class="plus bg-dark">+</span>
                             </div>
                             <br>
+
+                                <%--buy button--%>
                             <a href="/pay?id=${product.id}" class="text-dark buy_link">
-                                <button class="btn btn-dark btn-block" id="buy_button">Buy now
+                                <button class="btn btn-dark btn-block">Buy now
+                                        <%--                                    svg--%>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-credit-card-2-back" viewBox="0 0 16 16">
                                         <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1z"/>
@@ -279,9 +340,12 @@
                                 </button>
                             </a>
                             <br>
+
+                                <%--    Add to cart button--%>
                             <a href="/addToCart?id=${product.id}" class="text-success cart_link">
                                 <button class="btn btn-success btn-block" type="submit" name="id" value="${product.id}">
                                     Add to cart
+                                        <%--                                    svg--%>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                          fill="currentColor" class="bi bi-cart" viewBox="0 0 18 18">
                                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
@@ -298,7 +362,7 @@
         </c:forEach>
     </div>
 </div>
-<%--script for plus and minus--%>
+<%--script for plus and minus and get quantity--%>
 <script>
     $(document).ready(function () {
         $('.count').prop('disabled', true);
@@ -309,17 +373,14 @@
             if ($(this).next().val() > 0) $(this).next().val(+$(this).next().val() - 1);
         });
     });
-    $(function() {
-        $('.buy_link').each(function(j,element) {
+    $(function () {
+        $('.buy_link').each(function (j, element) {
             $(this).click(function () {
                 var inputs = $('input[name ="count"]');
                 var value = 0;
-                for(var i = 0; i < inputs.length; i++){
-                    // console.log($(inputs[i]).val() + " j:" + j);
-
-                    if(j == i){
+                for (var i = 0; i < inputs.length; i++) {
+                    if (j == i) {
                         value = $(inputs[i]).val();
-                        // console.log(value);
                     }
                 }
                 $(this).attr("href", $(this).attr("href") + "&quantity=" + value);
@@ -327,14 +388,14 @@
             });
 
         });
-        $('.cart_link').each(function(j,element) {
+        $('.cart_link').each(function (j, element) {
             $(this).click(function () {
                 var inputs = $('input[name ="count"]');
                 var value = 0;
-                for(var i = 0; i < inputs.length; i++){
+                for (var i = 0; i < inputs.length; i++) {
                     // console.log($(inputs[i]).val() + " j:" + j);
 
-                    if(j == i){
+                    if (j == i) {
                         value = $(inputs[i]).val();
                         // console.log(value);
                     }
@@ -346,9 +407,9 @@
         });
     });
 </script>
-<%--footer information adn link to top--%>
-<footer class="text-muted">
 
+<%--footer information and link to top--%>
+<footer class="text-muted">
     <div class="container">
         <p class="float-right">
             <a href="#" class="text-muted">Back to top</a>
@@ -357,7 +418,12 @@
     </div>
 </footer>
 </body>
-<%if(request.getParameter("msg") != null){%>
+
+<%--info about success buy or add to cart--%>
+<%if (request.getParameter("msg") != null) {%>
 <script>alert('<%= request.getParameter("msg") %>');</script>
-    <%}; %>
+<%
+    }
+    ;
+%>
 </html>
